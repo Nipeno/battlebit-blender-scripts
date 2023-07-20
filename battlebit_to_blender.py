@@ -6,6 +6,7 @@ def delete_zero_vertex_meshes():
 
     # Delete all selected objects (meshes with zero vertices)
     bpy.ops.object.delete({"selected_objects": mesh_objects})
+    print("Deleted zero vertex meshes.")
 
 def delete_objects_with_prefix(prefix):
     # Get a list of all objects in the scene with the specified prefix
@@ -13,6 +14,7 @@ def delete_objects_with_prefix(prefix):
 
     # Delete all selected objects
     bpy.ops.object.delete({"selected_objects": objects_to_delete})
+    print("Deleted objects with prefix:", prefix)
 
 def delete_non_lod1_objects():
     # Create a set to store base names of LOD objects
@@ -38,6 +40,7 @@ def delete_non_lod1_objects():
 
     # Delete all selected objects that don't contain "_LOD1" in their name
     bpy.ops.object.delete()
+    print("Deleted non-LOD1 objects.")
 
 def delete_empty_objects_with_prefix(prefix):
     # Get a list of all empty objects in the scene with the specified prefix
@@ -57,6 +60,15 @@ def delete_empty_objects_with_prefix(prefix):
 
     # Delete all selected empty objects
     bpy.ops.object.delete()
+    print("Deleted empty objects with prefix:", prefix)
+
+def delete_empty_empties():
+    all_objects = bpy.context.scene.objects
+
+    for obj in all_objects:
+        if obj.type == 'EMPTY' and not obj.children:
+            print('Removing ' + obj.name)
+            bpy.data.objects.remove(obj, do_unlink=True)
 
 # Call the functions to delete objects based on their properties
 delete_zero_vertex_meshes()
@@ -65,3 +77,4 @@ delete_empty_objects_with_prefix("KillZone.")
 delete_empty_objects_with_prefix("PHYS.")
 delete_non_lod1_objects()
 delete_objects_with_prefix("Model_1")
+delete_empty_empties()
