@@ -60,8 +60,8 @@ def delete_empty_objects_with_prefix(prefix):
 
 # Call the functions to delete objects based on their properties
 delete_zero_vertex_meshes()
-delete_objects_with_prefix("Colliders.")
-delete_objects_with_prefix("KillZone.")
-delete_non_lod1_objects()
-delete_objects_with_prefix("Model_1.")
+delete_empty_objects_with_prefix("Colliders.")
+delete_empty_objects_with_prefix("KillZone.")
 delete_empty_objects_with_prefix("PHYS.")
+delete_non_lod1_objects()
+delete_objects_with_prefix("Model_1")
